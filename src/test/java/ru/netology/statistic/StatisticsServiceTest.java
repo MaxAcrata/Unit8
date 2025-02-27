@@ -4,19 +4,38 @@ package ru.netology.statistic;
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-    public class StatisticsServiceTest {
+public class StatisticsServiceTest {
 
-        @Test
-        void findMax() {
-            StatisticsService service = new StatisticsService();
+    @Test
+    public void findMaxFirstTest() {
+        StatisticsService service = new StatisticsService();
 
-            long[] incomesInBillions = {12, 5, 8, 4, 5, 3, 8, 6, 11, 11, 12};
-            long expected = 11;
+        // Первый тестовый массив
+        long[] sales = {12, 5, 8, 4, 5, 3, 8, 6, 11, 11, 12};
+        int expected = 12;
 
-            long actual = service.findMax(incomesInBillions);
+        // Находим максимальное значение
+        long actual = service.findMax(sales);
 
-            Assertions.assertEquals(expected, actual);
-        }
+        // Проверяем, что результат соответствует ожидаемому
+        Assertions.assertEquals(expected, actual);
     }
 
+    @Test
+    public void findMaxSecondTest() {
+        StatisticsService service = new StatisticsService();
+
+        // Второй тестовый массив
+        long[] sales = {12, 14, 16, 4, 5, 3, 8, 6, 11, 11, 12};
+        int expected = 16;
+
+        // Находим максимальное значение
+        long actual = service.findMax(sales);
+
+        // Проверяем, что результат соответствует ожидаемому
+        Assertions.assertEquals(expected, actual);
+    }
+}

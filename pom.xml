@@ -50,6 +50,7 @@
                     </execution>
 
                     <execution>
+                        <!-- Генерация репорт файла -->
                         <id>report</id>
                         <phase>verify</phase>
                         <goals>
