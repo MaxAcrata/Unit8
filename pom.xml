@@ -15,8 +15,8 @@
     </properties>
     <dependencies>
         <!--  фреймворк JUnit 5 используется для написания и выполнения юнит-тестов в Java-приложениях Он предоставляет
-                механизмы для создания, управления и выполнения тестов, а также поддерживает параметризованные и динамические
-                тесты -->
+              механизмы для создания, управления и выполнения тестов, а также поддерживает параметризованные и
+              динамические тесты -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -27,32 +27,38 @@
     </dependencies>
     <build>
         <plugins>
-            <!--  Плагин используется для проверки соответствия кода определенным правилам и
-                        стандартам кодирования (code style). Автоматизирует процесс анализа качества кода
-                        и обеспечивает единообразие стиля программирования в проекте  -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.2.1</version> <!--  Актуальная версия  -->
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
                 <configuration>
-                    <checkstyleRules>
-                        <module name="Checker">
-                            <module name="TreeWalker">
-                                <module name="LocalVariableName"/>
-                            </module>
-                        </module>
-                    </checkstyleRules>
+                    <failIfNoTests>true</failIfNoTests>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.5</version>
+
                 <executions>
                     <execution>
-                        <id>validate</id>
-                        <phase>validate</phase>
+                        <id>prepare-agent</id>
                         <goals>
-                            <goal>check</goal>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
+
             <!--  Плагин используется для запуска юнит-тестов во время фазы test жизненного цикла Maven  -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
