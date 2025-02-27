@@ -1,32 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ru.netology.javaqa</groupId>
-    <artifactId>Jacoco</artifactId>
+    <groupId>your.group.id</groupId>
+    <artifactId>your-artifact-id</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jacoco.version>0.8.5</jacoco.version>
     </properties>
+
     <dependencies>
-        <!--  фреймворк JUnit 5 используется для написания и выполнения юнит-тестов в Java-приложениях Он предоставляет
-              механизмы для создания, управления и выполнения тестов, а также поддерживает параметризованные и
-              динамические тесты -->
+        <!-- JUnit 5 для тестирования -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>5.4.2</version>
-            <!--  Актуальная версия  -->
             <scope>test</scope>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
+            <!-- Maven Surefire Plugin для запуска тестов -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -36,12 +36,13 @@
                 </configuration>
             </plugin>
 
+            <!-- JaCoCo Plugin для измерения покрытия кода -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.5</version>
-
+                <version>${jacoco.version}</version>
                 <executions>
+                    <!-- Подготовка агента JaCoCo -->
                     <execution>
                         <id>prepare-agent</id>
                         <goals>
@@ -49,20 +50,39 @@
                         </goals>
                     </execution>
 
+                    <!-- Генерация отчёта JaCoCo -->
                     <execution>
-                        <!-- Генерация репорт файла -->
                         <id>report</id>
                         <phase>verify</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
                     </execution>
+
+                    <!-- Проверка покрытия кода -->
+                    <execution>
+                        <id>check-coverage</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <rule>
+                                    <element>CLASS</element> <!-- Указываем элемент, для которого проверяем покрытие -->
+                                    <limits>
+                                        <limit>
+                                            <counter>BRANCH</counter> <!-- Указываем счётчик BRANCH -->
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>1.0</minimum> <!-- Требуем 100% покрытия по BRANCH -->
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
-
-            <!--  Плагин используется для запуска юнит-тестов во время фазы test жизненного цикла Maven  -->
-
         </plugins>
     </build>
-
 </project>
