@@ -24,18 +24,18 @@ public class StatisticsServiceTest {
         Assertions.assertEquals(expected, actual);
     }
 
-//    @Test
-//    public void findMaxSecondTest() {
-//        StatisticsService service = new StatisticsService();
-//
-//        // Второй тестовый массив
-//        long[] sales = {12, 14, 16, 4, 5, 3, 8, 6, 11, 11, 12};
-//        int expected = 16;
-//
-//        // Находим максимальное значение
-//        long actual = service.findMax(sales);
-//
-//        // Проверяем, что результат соответствует ожидаемому
-//        Assertions.assertEquals(expected, actual);
-//    }
+    @Test
+    public void findMaxSecondTest() {
+        StatisticsService service = new StatisticsService();
+
+        // Второй тестовый массив
+        long[] sales = {12, 14, 16, 4, 5, 3, 8, 6, 11, 11, 12};
+        int expected = 16;
+
+        // Находим максимальное значение
+        long actual = service.findMax(sales);
+
+        // Проверяем, что результат соответствует ожидаемому
+        Assertions.assertEquals(expected, actual);
+    }
 }
